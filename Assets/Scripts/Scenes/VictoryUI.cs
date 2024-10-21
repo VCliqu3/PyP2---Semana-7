@@ -17,6 +17,11 @@ public class VictoryUI : MonoBehaviour
         InitializeButtonsListeners();
     }
 
+    private void Start()
+    {
+        EnemiesKilledHandler.ResetEnemiesKilled();
+    }
+
     private void InitializeButtonsListeners()
     {
         menuButton.onClick.AddListener(BackToMenu);
