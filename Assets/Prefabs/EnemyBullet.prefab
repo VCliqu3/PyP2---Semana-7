@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4998641268094488201}
   - component: {fileID: 5562204643276846105}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4ac9e023e9d27469be190120f44a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  speed: 9
+  damage: 2
+  speed: 6
   direction: {x: 0, y: 0, z: 0}
-  targetTag: Enemy
+  targetTag: Player
   lifeSpan: 5
 --- !u!1 &4416088649080872216
 GameObject:
@@ -165,7 +165,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1d406bac1285d645a5318dbcb1b06f9, type: 2}
+  - {fileID: 2100000, guid: f1aa8b263092575469936d7c6b417a56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

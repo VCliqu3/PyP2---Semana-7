@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float fireRate;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform bulletPrefab;
+    [Space]
+    [SerializeField] private float timeToStartShooting;
 
     private float shootTimer;
 
@@ -18,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
 
     private void InitializeVariables()
     {
-        shootTimer = 0f;
+        shootTimer = timeToStartShooting;
     }
 
     private void Update()
@@ -27,11 +29,9 @@ public class PlayerShoot : MonoBehaviour
         HandleShootCooldown();
     }
 
-    private bool GetFireInput() => InputManager.Instance.GetFireInput();
-
     private void CheckShoot()
     {
-        if (!GetFireInput()) return;
+        if (!PlayerHealth.Instance) return;
         if (ShootOnCooldown()) return;
 
         FireBullet();
@@ -46,7 +46,7 @@ public class PlayerShoot : MonoBehaviour
 
     private Vector3 GetShootDirection()
     {
-        Vector3 direction = (firePoint.position - transform.position);
+        Vector3 direction = (PlayerHealth.Instance.transform.position - firePoint.position);
         direction.y = 0;
 
         direction.Normalize();
