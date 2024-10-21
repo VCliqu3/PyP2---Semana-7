@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHasHealth
@@ -13,10 +14,11 @@ public class PlayerHealth : MonoBehaviour, IHasHealth
 
     private int health;
 
-    public static event EventHandler<OnPlayerTakeDamageEventArgs> OnPlayerTakeDamage;
+    public static event EventHandler<OnPlayerHealthEventArgs> OnPlayerHealthInitialized;
+    public static event EventHandler<OnPlayerHealthEventArgs> OnPlayerTakeDamage;
     public static event EventHandler OnPlayerDie;
 
-    public class OnPlayerTakeDamageEventArgs : EventArgs
+    public class OnPlayerHealthEventArgs : EventArgs
     {
         public int health;
     }
@@ -44,6 +46,7 @@ public class PlayerHealth : MonoBehaviour, IHasHealth
     private void InitializeVariables()
     {
         health = maxHealth;
+        OnPlayerHealthInitialized?.Invoke(this, new OnPlayerHealthEventArgs { health = maxHealth });
     }
 
     #region IHasHealth Methods
@@ -57,7 +60,7 @@ public class PlayerHealth : MonoBehaviour, IHasHealth
     {
         health = (health - quantity) < 0 ? 0 : health - quantity;
 
-        OnPlayerTakeDamage?.Invoke(this, new OnPlayerTakeDamageEventArgs { health = health});
+        OnPlayerTakeDamage?.Invoke(this, new OnPlayerHealthEventArgs { health = health});
 
         if (!IsAlive())
         {
