@@ -13,7 +13,7 @@ public class SceneLoadChecker : MonoBehaviour
         public string sceneName;
     }
 
-    void Start()
+    private void Awake()
     {
         CheckLoadScene();
     }
